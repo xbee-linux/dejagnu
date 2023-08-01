@@ -1,0 +1,36 @@
+schema-version: 1.0
+
+type: builder
+
+description: |
+  The DejaGnu package contains a framework for running test suites on GNU tools. 
+  It is written in expect, which itself uses Tcl (Tool Command Language).
+
+  dejagnu: DejaGNU auxiliary command launcher
+  runtest: A wrapper script that locates the proper expect shell and then runs DejaGNU
+
+
+var:
+  version: 1.6.3
+
+dependencies:
+  - texinfo
+  
+provision:
+  - url:
+      from: https://ftp.gnu.org/gnu/dejagnu/dejagnu-{{ .version }}.tar.gz
+      todir: "{{ .xbee.src }}"
+  - folder: "{{ .xbee.src }}/dejagnu-{{ .version }}/build"
+
+build:
+  - shell:
+      cmds:
+        - ../configure --prefix=/usr
+        - makeinfo --html --no-split -o doc/dejagnu.html ../doc/dejagnu.texi
+        - makeinfo --plaintext       -o doc/dejagnu.txt  ../doc/dejagnu.texi
+        - make install DESTDIR={{ .xbee.out }}
+        - install -v -dm755  {{ .xbee.out }}/usr/share/doc/dejagnu-1.6.3
+        - install -v -m644   doc/dejagnu.{html,txt} {{ .xbee.out }}/usr/share/doc/dejagnu-1.6.3
+      directory: "{{ .xbee.src }}/dejagnu-{{ .version }}/build"
+
+
