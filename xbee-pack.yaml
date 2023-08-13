@@ -13,9 +13,9 @@ description: |
 var:
   version: 1.6.3
 
-dependencies:
+builders:
   - texinfo
-  
+
 provision:
   - url:
       from: https://ftp.gnu.org/gnu/dejagnu/dejagnu-{{ .version }}.tar.gz
