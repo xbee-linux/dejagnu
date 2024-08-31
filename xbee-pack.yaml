@@ -11,14 +11,15 @@ description: |
 
 
 var:
-  version: 1.6.3
+  xbee:
+    version: 1.6.3
 
 builders:
   - texinfo
 
 provision:
-  - url: https://ftp.gnu.org/gnu/dejagnu/dejagnu-{{ .version }}.tar.gz
-  - folder: "{{ .xbee.src }}/dejagnu-{{ .version }}/build"
+  - url: https://ftp.gnu.org/gnu/dejagnu/dejagnu-{{ .xbee.version }}.tar.gz
+  - folder: "{{ .xbee.src }}/dejagnu-{{ .xbee.version }}/build"
 
 build:
   - shell:
@@ -29,6 +30,6 @@ build:
         - make install DESTDIR={{ .xbee.out }}
         - install -v -dm755  {{ .xbee.out }}/usr/share/doc/dejagnu-1.6.3
         - install -v -m644   doc/dejagnu.{html,txt} {{ .xbee.out }}/usr/share/doc/dejagnu-1.6.3
-      directory: "{{ .xbee.src }}/dejagnu-{{ .version }}/build"
+      directory: "{{ .xbee.src }}/dejagnu-{{ .xbee.version }}/build"
 
 
