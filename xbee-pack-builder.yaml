@@ -1,7 +1,5 @@
 schema-version: 1.0
 
-type: builder
-
 description: |
   The DejaGnu package contains a framework for running test suites on GNU tools. 
   It is written in expect, which itself uses Tcl (Tool Command Language).
@@ -14,8 +12,7 @@ var:
   xbee:
     version: 1.6.3
 
-builders:
-  - texinfo
+builder: texinfo
 
 provision:
   - url: https://ftp.gnu.org/gnu/dejagnu/dejagnu-{{ .xbee.version }}.tar.gz
